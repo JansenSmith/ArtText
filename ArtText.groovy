@@ -6,7 +6,7 @@ def piece = "mechEng"
 
 def font = "FreeSerif"
 def size_pts = 8
-def depth = 5 
+def depth = 0.16
 
 def spacing = 2
 
@@ -23,8 +23,12 @@ CSG WorcFreeInst = CSG.text(WorcFreeInst_string, depth, size_pts, font).movey(sp
 mechEng_string = "Mechanical Engineers, workers of the world"
 CSG mechEng = CSG.text(mechEng_string, depth, size_pts, font).movey(spacing_mm*2)
 
-//if piece = ""
+//if (piece.equals("mechEng")) {
 CSG ret = AAS_credit.union(WorcFreeInst).union(mechEng)
+//}	
+//else {
+//	println("what piece?")
+//}
 
 //BowlerStudioController.addCsg(ret)
 
@@ -32,7 +36,7 @@ ret = ret.mirrorx()
 
 ret = ret.setColor(javafx.scene.paint.Color.DARKRED)
 			.setName(piece)
-			.addAssemblyStep(0, new Transform().movez(5))
+			.addAssemblyStep(0, new Transform())
 			.setManufacturing({ toMfg ->
 				return toMfg
 						//.rotx(180)// fix the orientation
