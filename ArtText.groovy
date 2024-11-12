@@ -6,7 +6,7 @@ def piece = "mechEng"
 
 def font = "FreeSerif"
 def size_pts = 8
-def depth = 0.16
+def depth = 0.2
 
 def spacing = 2
 
@@ -20,7 +20,7 @@ CSG AAS_credit = CSG.text(AAS_string,depth, size_pts, font)
 WorcFreeInst_string = "Worcester Free Institute Buildings & Rooms, 1880"
 CSG WorcFreeInst = CSG.text(WorcFreeInst_string, depth, size_pts, font).movey(spacing_mm)
 
-mechEng_string = "Mechanical Engineers, workers of the world"
+mechEng_string = "Mechanical Engineers, workers of Worcester"
 CSG mechEng = CSG.text(mechEng_string, depth, size_pts, font).movey(spacing_mm*2)
 
 //if (piece.equals("mechEng")) {
@@ -32,7 +32,8 @@ CSG ret = AAS_credit.union(WorcFreeInst).union(mechEng)
 
 //BowlerStudioController.addCsg(ret)
 
-ret = ret.mirrorx()
+ret = ret.movex(15).movey(15)
+//ret = ret.mirrorx()
 
 ret = ret.setColor(javafx.scene.paint.Color.DARKRED)
 			.setName(piece)
@@ -43,6 +44,6 @@ ret = ret.setColor(javafx.scene.paint.Color.DARKRED)
 						//.toZMin()//move it down to the flat surface
 			})
 
-println javafx.scene.text.Font.getFontNames()
+//println javafx.scene.text.Font.getFontNames() 
 
 return ret
