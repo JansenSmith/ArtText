@@ -6,7 +6,7 @@ def piece = "mechEng"
 
 def font = "FreeSerif"
 def size_pts = 8
-def depth = 0.2
+def depth = 0.24
 
 def spacing = 2
 
