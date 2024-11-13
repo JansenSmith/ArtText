@@ -44,6 +44,6 @@ ret = ret.setColor(javafx.scene.paint.Color.DARKRED)
 						//.toZMin()//move it down to the flat surface
 			})
 
-//println javafx.scene.text.Font.getFontNames() 
+println javafx.scene.text.Font.getFontNames() 
 
 return ret
