@@ -1,4 +1,4 @@
-//import com.neuronrobotics.bowlerstudio.BowlerStudioController
+import com.neuronrobotics.bowlerstudio.BowlerStudioController
 
 import eu.mihosoft.vrl.v3d.*
 
@@ -35,8 +35,8 @@ CSG ret = AAS_credit.union(WorcFreeInst).union(mechEng)
 ret = ret.movex(15).movey(15)
 //ret = ret.mirrorx()
 
-ret = ret.setColor(javafx.scene.paint.Color.DARKRED)
-			.setName(piece)
+ret = ret.setColor(javafx.scene.paint.Color.PINK)
+			.setName(piece+"_desc_raw")
 			.addAssemblyStep(0, new Transform())
 			.setManufacturing({ toMfg ->
 				return toMfg
@@ -44,6 +44,6 @@ ret = ret.setColor(javafx.scene.paint.Color.DARKRED)
 						//.toZMin()//move it down to the flat surface
 			})
 
-println javafx.scene.text.Font.getFontNames() 
+//println javafx.scene.text.Font.getFontNames() 
 
 return ret
