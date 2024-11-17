@@ -3,6 +3,7 @@ import com.neuronrobotics.bowlerstudio.BowlerStudioController
 import eu.mihosoft.vrl.v3d.*
 
 def piece = "mechEng"
+//def piece = "boynton"
 
 def font = "FreeSerif"
 def size_pts = 8
@@ -17,10 +18,10 @@ def spacing_mm = size_mm * 1.3 * 2
 def AAS_string = "Courtesy, American Antiquarian Society"
 CSG AAS_credit = CSG.text(AAS_string,depth, size_pts, font)
 
-WorcFreeInst_string = "Worcester Free Institute Buildings & Rooms, 1880"
+def WorcFreeInst_string = "Worcester Free Institute Buildings & Rooms, 1880"
 CSG WorcFreeInst = CSG.text(WorcFreeInst_string, depth, size_pts, font).movey(spacing_mm)
 
-mechEng_string = "Mechanical Engineers, workers of Worcester"
+def mechEng_string = "Mechanical Engineers, workers of Worcester"
 CSG mechEng = CSG.text(mechEng_string, depth, size_pts, font).movey(spacing_mm*2)
 
 //if (piece.equals("mechEng")) {
