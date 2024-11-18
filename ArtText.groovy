@@ -15,7 +15,7 @@ if(args==null){
 	print_fonts = false
 }
 
-def font = "FreeSerif"
+def font = "FreeSerif Bold"
 def size_pts = 8
 def depth = 0.24
 
@@ -76,8 +76,9 @@ if (print_fonts) {
 	def fonts = javafx.scene.text.Font.getFontNames()
 	def fontIndex = 0
 	while (fontIndex < fonts.size()) {
-	    def chunk = fonts.subList(fontIndex, Math.min(fontIndex + 100, fonts.size()))
-	    println "Fonts ${fontIndex+1} to ${fontIndex+100}:"
+	    def endFont = Math.min(fontIndex + 100, fonts.size())
+	    def chunk = fonts.subList(fontIndex, endFont)
+	    println "Fonts ${fontIndex+1} to $endFont:"
 	    chunk.each { fontName -> println fontName }
 	    Thread.sleep(100) // pause for 0.1 seconds
 	    fontIndex += 100
