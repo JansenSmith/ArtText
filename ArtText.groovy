@@ -23,7 +23,7 @@ def spacing = 2
 
 def size_in = size_pts / 72
 def size_mm = size_in * 25.4
-def spacing_mm = size_mm * 1.3 * 2
+def spacing_mm = size_mm * 1.3 * 2.4
 
 def AAS_string = "Courtesy, American Antiquarian Society"
 def WorcFreeInst_string = "Worcester Free Institute Buildings & Rooms, 1880"
@@ -55,7 +55,7 @@ CSG thirdLine = CSG.text(thirdLine_string,depth, size_pts, font)
 
 CSG ret = thirdLine.union(secondLine).union(firstLine)
 
-ret = ret.movex(15).movey(15)
+ret = ret.movex(12).movey(15)
 //ret = ret.mirrorx()
 
 ret = ret.setColor(javafx.scene.paint.Color.PINK)
