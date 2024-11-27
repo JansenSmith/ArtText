@@ -17,7 +17,7 @@ if(args==null){
 
 def font = "FreeSerif Bold"
 def size_pts = 8
-def depth = 0.24
+def depth = 0.48
 
 def spacing = 2
 
