@@ -17,7 +17,7 @@ if(args==null){
 
 def font = "FreeSerif Bold"
 def size_pts = 8
-def depth = 0.48
+def depth = 0.4
 
 def spacing = 2
 
@@ -47,8 +47,8 @@ switch (name) {
 		thirdLine_string = AAS_string
 		break
 	case "trotting":
-		firstLine_string = boynton_string
-		secondLine_string = WorcFreeInst_string
+		firstLine_string = trotting_string
+		secondLine_string = CurrierIves_1853_string
 		thirdLine_string = AAS_string
 		break
 	default:
