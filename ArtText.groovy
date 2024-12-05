@@ -25,10 +25,12 @@ def size_in = size_pts / 72
 def size_mm = size_in * 25.4
 def spacing_mm = size_mm * 1.3 * 2.4
 
-def AAS_string = "Courtesy, American Antiquarian Society"
-def WorcFreeInst_string = "Worcester Free Institute Buildings & Rooms, 1880"
 def mechEng_string = "Mechanical Engineers, workers of Worcester"
 def boynton_string = "Boynton Hall and surroundings"
+def WorcFreeInst_string = "Worcester Free Institute Buildings & Rooms, 1880"
+def trotting_string = "Trotting cracks on the snow"
+def CurrierIves_1853_string = "Currier & Ives, 1853"
+def AAS_string = "Courtesy, American Antiquarian Society"
 
 def firstLine_string
 def secondLine_string
@@ -40,6 +42,11 @@ switch (name) {
 		thirdLine_string = AAS_string
 		break
 	case "boynton":
+		firstLine_string = boynton_string
+		secondLine_string = WorcFreeInst_string
+		thirdLine_string = AAS_string
+		break
+	case "trotting":
 		firstLine_string = boynton_string
 		secondLine_string = WorcFreeInst_string
 		thirdLine_string = AAS_string
