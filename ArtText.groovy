@@ -24,6 +24,7 @@ def spacing = 2
 def size_in = size_pts / 72
 def size_mm = size_in * 25.4
 def spacing_mm = size_mm * 1.3 * 2.4
+//println spacing_mm
 
 def mechEng_string = "Mechanical Engineers, workers of Worcester"
 def boynton_string = "Boynton Hall and surroundings"
@@ -37,11 +38,10 @@ def celebrating_string = "Celebrating history and community spirit"
 def willie_string = "Steamboat Willie, by Ub Iwerks"
 def AAS_string = "Courtesy, American Antiquarian Society"
 def WHM_string = "Courtesy, Worcester Historical Museum"
-//def pubdom_string = "🅮"
 
 def firstLine_string
 def secondLine_string
-def thirdLine_stringe
+def thirdLine_string
 def fourthLine_string
 switch (name) {
 	case "mechEng":
@@ -66,8 +66,13 @@ switch (name) {
 		fourthLine_string = regatta_string
 		break
 	case "ubiwerks":
-		firstLine_string = willie_string
-		//secondLine_string = pubdom_string
+		firstLine_string =  (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
+		                            "publicdomainiconextrusion.groovy" , // file to load
+		                            depth// no parameters (see next tutorial)
+                        			)
+		secondLine_string = willie_string
+		break
 	default:
 		throw new Exception("Unknown option: $name")
 		break
