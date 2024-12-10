@@ -28,39 +28,74 @@ def spacing_mm = size_mm * 1.3 * 2.4
 def mechEng_string = "Mechanical Engineers, workers of Worcester"
 def boynton_string = "Boynton Hall and surroundings"
 def WorcFreeInst_string = "Worcester Free Institute Buildings & Rooms, 1880"
-def trotting_string = "Trotting cracks on the snow"
-def CurrierIves_1853_string = "Currier & Ives, 1853"
+def trotting_string = "Trotting cracks on the snow, by Louis Maurer"
+def regatta_string = "Worcester's Regatta Roots"
+def CurrierIves_1853_string = "Published by Currier & Ives, 1853"
+def LakeQuinsigamond_1868_string = "Lake Quinsigamond, 1868"
+def celebrating_string = "Celebrating history and community spirit"
+//def celebrating_string = "Preserving a moment in time from Worcester's past"
+def willie_string = "Steamboat Willie, by Ub Iwerks"
 def AAS_string = "Courtesy, American Antiquarian Society"
+def WHM_string = "Courtesy, Worcester Historical Museum"
+//def pubdom_string = "🅮"
 
 def firstLine_string
 def secondLine_string
-def thirdLine_string
+def thirdLine_stringe
+def fourthLine_string
 switch (name) {
 	case "mechEng":
-		firstLine_string = mechEng_string
+		firstLine_string = AAS_string
 		secondLine_string = WorcFreeInst_string
-		thirdLine_string = AAS_string
+		thirdLine_string = mechEng_string
 		break
 	case "boynton":
-		firstLine_string = boynton_string
+		firstLine_string = AAS_string
 		secondLine_string = WorcFreeInst_string
-		thirdLine_string = AAS_string
+		thirdLine_string = boynton_string
 		break
 	case "trotting":
-		firstLine_string = trotting_string
+		firstLine_string = AAS_string
 		secondLine_string = CurrierIves_1853_string
-		thirdLine_string = AAS_string
+		thirdLine_string = trotting_string
 		break
+	case "regatta":
+		firstLine_string = WHM_string
+		secondLine_string = celebrating_string
+		thirdLine_string = LakeQuinsigamond_1868_string
+		fourthLine_string = regatta_string
+		break
+	case "ubiwerks":
+		firstLine_string = willie_string
+		//secondLine_string = pubdom_string
 	default:
 		throw new Exception("Unknown option: $name")
 		break
 }
 
-CSG firstLine = CSG.text(firstLine_string, depth, size_pts, font).movey(spacing_mm*2)
-CSG secondLine = CSG.text(secondLine_string, depth, size_pts, font).movey(spacing_mm)
-CSG thirdLine = CSG.text(thirdLine_string,depth, size_pts, font)
+CSG ret
+CSG firstLine
 
-CSG ret = thirdLine.union(secondLine).union(firstLine)
+firstLine = CSG.text(firstLine_string, depth, size_pts, font)
+ret = firstLine
+
+
+if (secondLine_string) {
+	CSG secondLine = CSG.text(secondLine_string, depth, size_pts, font).movey(spacing_mm)
+	ret = ret.union(secondLine)
+}
+
+
+if (thirdLine_string) {
+	CSG thirdLine = CSG.text(thirdLine_string,depth, size_pts, font).movey(spacing_mm*2)
+	ret = ret.union(thirdLine)
+}
+
+if (fourthLine_string) {
+	CSG fourthLine = CSG.text(fourthLine_string, depth, size_pts, font).movey(spacing_mm*3)
+	ret = ret.union(fourthLine)
+}
+
 
 ret = ret.movex(12).movey(15)
 //ret = ret.mirrorx()
