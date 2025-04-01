@@ -116,7 +116,7 @@ switch (name) {
 		break
 	case "jankal":
 		//sixthLine_string = 
-		fifthLine_string = "Memories from Kaua'i"
+		fifthLine_string = "Memories of Kaua'i"
 		fourthLine_string = "Danyel & Jansen"
 		thirdLine_string = "March 31, 2023"
 		secondLine = (CSG)ScriptingEngine.gitScriptRun(
