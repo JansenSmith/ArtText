@@ -45,6 +45,7 @@ def ubiwerks_string = "By Ub Iwerks, 1901–1971"
 def AAS_string = "Courtesy, American Antiquarian Society"
 def WHM_string = "Courtesy, Worcester Historical Museum"
 def PDR_string = "Courtesy, The Public Domain Review"
+def NOB_string = "Courtesy, N.O. Bonzo"
 
 ArrayList<Object> icon_params = new ArrayList<Object>();
 icon_params.add(depth) //add
@@ -145,12 +146,28 @@ switch (name) {
 		                            icon_params// no parameters (see next tutorial)
                         			)
 		break
+	case "gigi_tal":
+		sixthLine_string = "Partners in Crime, 2025"
+		fifthLine_string = "Gigi & Cousin Tal"
+		fourthLine_string = "We hope to look as Fine..."
+		thirdLine_string = "Jansen & Danyel"
+		break
 	case "anmol":
 		seventhLine_string = "Grow with each other &"
 		sixthLine_string = "Make memories"
 		fourthLine_string = "Anmol & Dhruv"
 		thirdLine_string = "22 January, 2025"
 //		secondLine = (CSG)ScriptingEngine.gitScriptRun(
+//	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
+//		                            "publicdomainiconextrusion.groovy" , // file to load
+//		                            icon_params// no parameters (see next tutorial)
+//                        			)
+		break
+	case "solidarityForever":
+		sixthLine_string = "Solidarity Forever"
+		fifthLine_string = "May Day"
+		fourthLine_string = NOB_string
+//		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
 //	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
 //		                            "publicdomainiconextrusion.groovy" , // file to load
 //		                            icon_params// no parameters (see next tutorial)
