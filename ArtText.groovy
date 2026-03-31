@@ -167,11 +167,11 @@ switch (name) {
 		sixthLine_string = "Solidarity Forever"
 		fifthLine_string = "May Day"
 		fourthLine_string = NOB_string
-//		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
-//	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-//		                            "publicdomainiconextrusion.groovy" , // file to load
-//		                            icon_params// no parameters (see next tutorial)
-//                        			)
+		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
+		                            "publicdomainiconextrusion.groovy" , // file to load
+		                            icon_params// no parameters (see next tutorial)
+                        			)
 		break
 	default:
 		throw new Exception("Unknown option: $name")
