@@ -16,7 +16,7 @@ if(args==null){
 	print_fonts = false
 }
 
-def font = "TeX Gyre Schola Bold"
+def font = "TeXGyrePagella-Bold"
 def size_pts = 8
 def depth = 0.4
 
