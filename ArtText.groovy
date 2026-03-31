@@ -69,11 +69,11 @@ switch (name) {
 		thirdLine_string = trotting_string
 		break
 	case "regatta":
-//		firstLine = (CSG)ScriptingEngine.gitScriptRun(
-//	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
-//		                            "publicdomainiconextrusion.groovy",
-//		                            icon_params
-//                        			)
+		firstLine = (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
+		                            "publicdomainiconextrusion.groovy",
+		                            icon_params
+                        			)
 		secondLine_string = WHM_string
 		thirdLine_string = celebrating_string
 		fourthLine_string = LakeQuinsigamond_1868_string
