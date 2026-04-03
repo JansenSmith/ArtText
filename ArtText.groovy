@@ -16,7 +16,7 @@ if(args==null){
 	print_fonts = false
 }
 
-def font = "TeX Gyre Pagella Bold"
+def font = "Serif Bold"
 def size_pts = 8
 def depth = 0.4
 
@@ -167,6 +167,15 @@ switch (name) {
 //		                            "publicdomainiconextrusion.groovy" , // file to load
 //		                            icon_params// no parameters (see next tutorial)
 //                        			)
+		break
+	case "wolves":
+		fifthLine_string = "Keeping the Wolves at Bay"
+		fourthLine_string = "In Memory of Keith Haring, 1958–1990"
+		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
+		                            "publicdomainiconextrusion.groovy",
+		                            icon_params
+                        			)
 		break
 	case "solidarityForever":
 		sixthLine_string = "Solidarity Forever"
