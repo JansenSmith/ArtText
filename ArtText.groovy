@@ -187,6 +187,16 @@ switch (name) {
 		                            icon_params// no parameters (see next tutorial)
                         			)
 		break
+	case "separation":
+		sixthLine_string = "Separation"
+		fifthLine_string = "Adskillelse"
+		fourthLine_string = "\u00c5sg\u00e5rdstrand, Norway, 1896"
+		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
+		                            "publicdomainiconextrusion.groovy",
+		                            icon_params
+                        			)
+		break
 	default:
 		throw new Exception("Unknown option: $name")
 		break
