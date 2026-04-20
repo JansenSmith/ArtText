@@ -188,7 +188,7 @@ switch (name) {
                         			)
 		break
 	case "separation":
-		seventhLine_string = "Separation"
+		seventhLine_string = "Separation, 2026"
 		sixthLine_string = "Adskillelse"
 		fifthLine_string = "\u00c5sg\u00e5rdstrand, Norway, 1896"
 		fourthLine_string = "Edvard Munch, 1863\u20131944"
