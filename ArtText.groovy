@@ -188,9 +188,10 @@ switch (name) {
                         			)
 		break
 	case "separation":
-		sixthLine_string = "Separation"
-		fifthLine_string = "Adskillelse"
-		fourthLine_string = "\u00c5sg\u00e5rdstrand, Norway, 1896"
+		seventhLine_string = "Separation"
+		sixthLine_string = "Adskillelse"
+		fifthLine_string = "\u00c5sg\u00e5rdstrand, Norway, 1896"
+		fourthLine_string = "Edvard Munch, 1863\u20131944"
 		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
 	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
 		                            "publicdomainiconextrusion.groovy",
