@@ -198,6 +198,17 @@ switch (name) {
 		                            icon_params
                         			)
 		break
+	case "worcester_union":
+		seventhLine_string = "Worcester Union Station, 2026"
+		sixthLine_string = "Luce's side view of the \"new\" Union Station, ca. 1915."
+		fifthLine_string = "Photography by E.B. Luce, 1864\u20131938"
+		fourthLine_string = "Courtesy, Worcester Historical Museum"
+		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
+		                            "publicdomainiconextrusion.groovy",
+		                            icon_params
+                        			)
+		break
 	default:
 		throw new Exception("Unknown option: $name")
 		break
