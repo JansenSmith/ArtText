@@ -200,7 +200,7 @@ switch (name) {
 		break
 	case "worcester_union":
 		seventhLine_string = "Worcester Union Station, 2026"
-		sixthLine_string = "Luce's side view of the \"new\" Union Station, ca. 1915."
+		sixthLine_string = "\"New\" Union Station, ca. 1915"
 		fifthLine_string = "Photography by E.B. Luce, 1864\u20131938"
 		fourthLine_string = "Courtesy, Worcester Historical Museum"
 		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
