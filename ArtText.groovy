@@ -187,6 +187,12 @@ switch (name) {
 		                            icon_params// no parameters (see next tutorial)
                         			)
 		break
+	case "solidarityForever_isabel":
+		sixthLine_string = "May Day, Isabel's Day"
+		fifthLine_string = "This Year And Every Year"
+		fourthLine_string = "Solidarity Forever"
+		thirdLine_string = NOB_string
+		break
 	case "separation":
 		seventhLine_string = "Separation, 2026"
 		sixthLine_string = "Adskillelse"
