@@ -189,7 +189,7 @@ switch (name) {
 		break
 	case "solidarityForever_isabel":
 		sixthLine_string = "May Day, Isabel's Day"
-		fifthLine_string = "This Year And Every Year"
+		fifthLine_string = "This Year and Every Year"
 		fourthLine_string = "Solidarity Forever"
 		thirdLine_string = NOB_string
 		break
