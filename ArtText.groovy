@@ -204,7 +204,7 @@ switch (name) {
 		                            icon_params
                         			)
 		break
-	case "worcester_union":
+	case "horsesDontKnow_union":
 		seventhLine_string = "The Horses Don't Know, 2026"
 		sixthLine_string = "\"New\" Union Station, ca. 1915"
 		fifthLine_string = "Photography by E.B. Luce, 1864\u20131938"
