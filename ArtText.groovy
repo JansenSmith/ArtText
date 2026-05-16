@@ -220,7 +220,7 @@ switch (name) {
 		sixthLine_string = "Courtesy, an unnamed human artist"
 		fifthLine_string = "From Altamira ceiling, Cantabria"
 		fourthLine_string = "c. 9,000 years before writing"
-		thirdLine_string = "After Breuil, 1906"
+		thirdLine_string = "After Henri Breuil, 1906"
 		secondLine = (CSG)ScriptingEngine.gitScriptRun(
 	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
 		                            "publicdomainiconextrusion.groovy",
