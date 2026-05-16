@@ -215,6 +215,18 @@ switch (name) {
 		                            icon_params
                         			)
 		break
+	case "bisonCouche":
+		seventhLine_string = "A Bison Couchant, 2026"
+		sixthLine_string = "Courtesy, an unnamed human artist"
+		fifthLine_string = "From Altamira ceiling, Cantabria"
+		fourthLine_string = "c. 9,000 years before writing"
+		thirdLine_string = "After Breuil, 1906"
+		secondLine = (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
+		                            "publicdomainiconextrusion.groovy",
+		                            icon_params
+                        			)
+		break
 	default:
 		throw new Exception("Unknown option: $name")
 		break
