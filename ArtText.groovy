@@ -64,9 +64,15 @@ switch (name) {
 		thirdLine_string = boynton_string
 		break
 	case "trotting":
-		firstLine_string = AAS_string
-		secondLine_string = CurrierIves_1853_string
-		thirdLine_string = trotting_string
+		seventhLine_string = "Trotting cracks on the snow, 2026"
+		sixthLine_string = CurrierIves_1853_string
+		fifthLine_string = "Lithograph by Louis Maurer, 1832–1932"
+		fourthLine_string = AAS_string
+		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
+		                            "publicdomainiconextrusion.groovy",
+		                            icon_params
+                        			)
 		break
 	case "regatta":
 		firstLine = (CSG)ScriptingEngine.gitScriptRun(
