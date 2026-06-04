@@ -175,9 +175,9 @@ switch (name) {
 //                        			)
 		break
 	case "wolves":
-		fifthLine_string = "Keeping the Wolves at Bay"
-		fourthLine_string = "In Memory of Keith Haring, 1958–1990"
-		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
+		sixthLine_string = "Keeping the Wolves at Bay, 2026"
+		fifthLine_string = "In Memory of Keith Haring, 1958–1990"
+		fourthLine = (CSG)ScriptingEngine.gitScriptRun(
 	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
 		                            "publicdomainiconextrusion.groovy",
 		                            icon_params
