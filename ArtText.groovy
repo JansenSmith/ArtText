@@ -7,7 +7,7 @@ def print_fonts
 if(args==null){
 	//name = "mechEng"
 	//name = "ubiwerks"
-	name = "fight"
+	name = "fightThem"
 	println "No parameters found. Using name = "+name
 	print_fonts = true
 } else {
@@ -116,7 +116,7 @@ switch (name) {
 		thirdLine_string = "1833"
 		fourthLine_string = "Stebbins"
 		break
-	case "fight":
+	case "fightThem":
 		fifthLine_string = "Fight"
 		fourthLine_string = "Butler, Pennsylvania"
 		thirdLine_string = "July 13, 2024"
