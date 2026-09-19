@@ -16,7 +16,15 @@ if(args==null){
 	print_fonts = false
 }
 
-def font = "TeX Gyre Pagella Bold"
+// Font faces. Names are matched against JavaFX's own font list ignoring case, spaces
+// and hyphens, so "TeX Gyre Pagella Bold" and "TeXGyrePagella-Bold" both resolve.
+// JavaFX silently substitutes "System Regular" for a name it can't find, so an
+// unresolvable name throws instead.
+def BOLD = "TeX Gyre Pagella Bold"
+def BOLD_ITALIC = "TeX Gyre Pagella Bold Italic"
+def ITALIC = "TeX Gyre Pagella Italic"
+def REGULAR = "TeX Gyre Pagella Regular"
+def font = BOLD // default for plain-string lines
 def size_pts = 8
 def depth = 0.4
 
@@ -50,272 +58,211 @@ def NOB_string = "Courtesy, N.O. Bonzo"
 ArrayList<Object> icon_params = new ArrayList<Object>();
 icon_params.add(depth) //add
 
-def firstLine_string, secondLine_string, thirdLine_string, fourthLine_string, fifthLine_string, sixthLine_string, seventhLine_string
-CSG firstLine, secondLine, thirdLine, fourthLine, fifthLine, sixthLine, seventhLine
+def pdIcon = { ->
+	return (CSG)ScriptingEngine.gitScriptRun(
+	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
+		                            "publicdomainiconextrusion.groovy",
+		                            icon_params
+                        			)
+}
+
+// Lines, keyed by line number: line 1 sits at the bottom, each line above it one
+// spacing_mm higher. Unused numbers leave a blank line. A line is one of:
+//   "text"                              — set in the default font
+//   pdIcon()                            — any CSG, placed as-is
+//   [seg, seg, ...]                     — segments laid left to right, each one:
+//        "text" | [text: "...", font: ITALIC] | pdIcon()
+//     a CSG segment is centered on the cap height of the text before it.
+def lines = [:]
 switch (name) {
 	case "mechEng":
-		firstLine_string = AAS_string
-		secondLine_string = WorcFreeInst_string
-		thirdLine_string = mechEng_string
+		lines[1] = AAS_string
+		lines[2] = WorcFreeInst_string
+		lines[3] = mechEng_string
 		break
 	case "boynton":
-		firstLine_string = AAS_string
-		secondLine_string = WorcFreeInst_string
-		thirdLine_string = boynton_string
+		lines[1] = AAS_string
+		lines[2] = WorcFreeInst_string
+		lines[3] = boynton_string
 		break
 	case "trotting":
-		seventhLine_string = "Trotting cracks on the snow, 2026"
-		sixthLine_string = CurrierIves_1853_string
-		fifthLine_string = "Lithograph by Louis Maurer, 1832–1932"
-		fourthLine_string = AAS_string
-		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
-		                            "publicdomainiconextrusion.groovy",
-		                            icon_params
-                        			)
+		lines[7] = "Trotting cracks on the snow, 2026"
+		lines[6] = CurrierIves_1853_string
+		lines[5] = "Lithograph by Louis Maurer, 1832–1932"
+		lines[4] = AAS_string
+		lines[3] = pdIcon()
 		break
 	case "regatta":
-		firstLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
-		                            "publicdomainiconextrusion.groovy",
-		                            icon_params
-                        			)
-		secondLine_string = WHM_string
-		thirdLine_string = celebrating_string
-		fourthLine_string = LakeQuinsigamond_1868_string
-		fifthLine_string = regatta_string
+		lines[1] = pdIcon()
+		lines[2] = WHM_string
+		lines[3] = celebrating_string
+		lines[4] = LakeQuinsigamond_1868_string
+		lines[5] = regatta_string
+		break
+	case "regatta_triangles":
+		// Study piece: every Pagella face, a mixed-face line, the PD icon inline.
+		// Upper block is my piece; lower block is the source.
+		lines[8] = [[text: "Worcester's Regatta Roots, 2026", font: BOLD_ITALIC], pdIcon()]
+		lines[7] = [[text: "By", font: REGULAR], [text: "Jansen Smith", font: BOLD]]
+		lines[6] = [[text: "Stamped in triangles", font: ITALIC]]
+		lines[5] = [[text: "Layered in PLA", font: ITALIC]]
+		lines[3] = [[text: "The College Regatta at Worcester, 1868", font: ITALIC]]
+		lines[2] = [[text: "From a sketch by C.E.H. Bonwill", font: REGULAR]]
+		lines[1] = [[text: WHM_string, font: REGULAR]]
 		break
 	case "ubiwerks":
-		//firstLine_string = " " 
-		thirdLine_string = PDR_string
-		fourthLine_string = ubiwerks_string
-		fifthLine_string = willie_string
-		sixthLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
+		lines[3] = PDR_string
+		lines[4] = ubiwerks_string
+		lines[5] = willie_string
+		lines[6] = pdIcon()
 		break
 	case "harrington":
-		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
-		thirdLine_string = "2024"
-		fourthLine_string = harr_string
-		
+		lines[2] = pdIcon()
+		lines[3] = "2024"
+		lines[4] = harr_string
 		break
 	case "stebbins":
-		firstLine_string = AAS_string
-		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
-		thirdLine_string = "1833"
-		fourthLine_string = "Stebbins"
+		lines[1] = AAS_string
+		lines[2] = pdIcon()
+		lines[3] = "1833"
+		lines[4] = "Stebbins"
 		break
 	case "fightThem":
-		fifthLine_string = "Fight"
-		fourthLine_string = "Butler, Pennsylvania"
-		thirdLine_string = "July 13, 2024"
-		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
+		lines[5] = "Fight"
+		lines[4] = "Butler, Pennsylvania"
+		lines[3] = "July 13, 2024"
+		lines[2] = pdIcon()
 		break
 	case "jankal":
-		//sixthLine_string = 
-		fifthLine_string = "Memories of Kaua'i"
-		fourthLine_string = "Danyel & Jansen"
-		thirdLine_string = "March 31, 2023"
-		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
+		lines[5] = "Memories of Kaua'i"
+		lines[4] = "Danyel & Jansen"
+		lines[3] = "March 31, 2023"
+		lines[2] = pdIcon()
 		break
 	case "toussaint":
-		fifthLine_string = "Revolutionary Red"
-		fourthLine_string = "Toussaint L'Ouverture"
-		thirdLine_string = "By George DeBaptiste, 1870"
-		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
+		lines[5] = "Revolutionary Red"
+		lines[4] = "Toussaint L'Ouverture"
+		lines[3] = "By George DeBaptiste, 1870"
+		lines[2] = pdIcon()
 		break
 	case "depose":
-		fifthLine_string = "DENY - DEFEND - DEPOSE"
-		fourthLine_string = "By Spade.Ink"
-		thirdLine_string = "Courtesy, Punk With A Camera"
-		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
+		lines[5] = "DENY - DEFEND - DEPOSE"
+		lines[4] = "By Spade.Ink"
+		lines[3] = "Courtesy, Punk With A Camera"
+		lines[2] = pdIcon()
 		break
 	case "gigi_tal":
-		sixthLine_string = "Partners in Crime, 2025"
-		fifthLine_string = "Gigi & Cousin Tal"
-		fourthLine_string = "We hope to look as Fine..."
-		thirdLine_string = "Jansen & Danyel"
+		lines[6] = "Partners in Crime, 2025"
+		lines[5] = "Gigi & Cousin Tal"
+		lines[4] = "We hope to look as Fine..."
+		lines[3] = "Jansen & Danyel"
 		break
 	case "anmol":
-		seventhLine_string = "Grow with each other &"
-		sixthLine_string = "Make memories"
-		fourthLine_string = "Anmol & Dhruv"
-		thirdLine_string = "22 January, 2025"
-//		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-//	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-//		                            "publicdomainiconextrusion.groovy" , // file to load
-//		                            icon_params// no parameters (see next tutorial)
-//                        			)
+		lines[7] = "Grow with each other &"
+		lines[6] = "Make memories"
+		lines[4] = "Anmol & Dhruv"
+		lines[3] = "22 January, 2025"
 		break
 	case "wolves":
-		sixthLine_string = "Keeping the Wolves at Bay, 2026"
-		fifthLine_string = "In Memory of Keith Haring, 1958–1990"
-		fourthLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
-		                            "publicdomainiconextrusion.groovy",
-		                            icon_params
-                        			)
+		lines[6] = "Keeping the Wolves at Bay, 2026"
+		lines[5] = "In Memory of Keith Haring, 1958–1990"
+		lines[4] = pdIcon()
 		break
 	case "solidarityForever":
-		sixthLine_string = "Solidarity Forever"
-		fifthLine_string = "May Day"
-		fourthLine_string = NOB_string
-		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git", // git location of the library
-		                            "publicdomainiconextrusion.groovy" , // file to load
-		                            icon_params// no parameters (see next tutorial)
-                        			)
+		lines[6] = "Solidarity Forever"
+		lines[5] = "May Day"
+		lines[4] = NOB_string
+		lines[3] = pdIcon()
 		break
 	case "solidarityForever_isabel":
-		sixthLine_string = "May Day, Isabel's Day"
-		fifthLine_string = "This Year and Every Year"
-		fourthLine_string = "Solidarity Forever"
-		thirdLine_string = NOB_string
+		lines[6] = "May Day, Isabel's Day"
+		lines[5] = "This Year and Every Year"
+		lines[4] = "Solidarity Forever"
+		lines[3] = NOB_string
 		break
 	case "separation":
-		seventhLine_string = "Separation, 2026"
-		sixthLine_string = "Adskillelse"
-		fifthLine_string = "\u00c5sg\u00e5rdstrand, Norway, 1896"
-		fourthLine_string = "Edvard Munch, 1863\u20131944"
-		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
-		                            "publicdomainiconextrusion.groovy",
-		                            icon_params
-                        			)
+		lines[7] = "Separation, 2026"
+		lines[6] = "Adskillelse"
+		lines[5] = "Åsgårdstrand, Norway, 1896"
+		lines[4] = "Edvard Munch, 1863–1944"
+		lines[3] = pdIcon()
 		break
 	case "horsesDontKnow_union":
-		seventhLine_string = "The Horses Don't Know, 2026"
-		sixthLine_string = "\"New\" Union Station, ca. 1915"
-		fifthLine_string = "Photography by E.B. Luce, 1864\u20131938"
-		fourthLine_string = "Courtesy, Worcester Historical Museum"
-		thirdLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
-		                            "publicdomainiconextrusion.groovy",
-		                            icon_params
-                        			)
+		lines[7] = "The Horses Don't Know, 2026"
+		lines[6] = "\"New\" Union Station, ca. 1915"
+		lines[5] = "Photography by E.B. Luce, 1864–1938"
+		lines[4] = "Courtesy, Worcester Historical Museum"
+		lines[3] = pdIcon()
 		break
 	case "bisonCouche":
-		seventhLine_string = "A Bison Couchant, 2026"
-		sixthLine_string = "Courtesy, an unnamed human artist"
-		fifthLine_string = "From Altamira ceiling, Cantabria"
-		fourthLine_string = "c. 9,000 years before writing"
-		thirdLine_string = "After Henri Breuil, 1906"
-		secondLine = (CSG)ScriptingEngine.gitScriptRun(
-	                                "https://github.com/JansenSmith/publicdomainiconextrusion.git",
-		                            "publicdomainiconextrusion.groovy",
-		                            icon_params
-                        			)
+		lines[7] = "A Bison Couchant, 2026"
+		lines[6] = "Courtesy, an unnamed human artist"
+		lines[5] = "From Altamira ceiling, Cantabria"
+		lines[4] = "c. 9,000 years before writing"
+		lines[3] = "After Henri Breuil, 1906"
+		lines[2] = pdIcon()
 		break
 	default:
 		throw new Exception("Unknown option: $name")
 		break
 }
 
+def fontNames = javafx.scene.text.Font.getFontNames()
+def fontKey = { String s -> s.toLowerCase().replaceAll(/[^a-z0-9]/, "") }
+def resolveFont = { String want ->
+	def hit = fontNames.find { fontKey(it) == fontKey(want) }
+	if (hit == null)
+		throw new Exception("ArtText: font '${want}' is not in the JavaFX font list; refusing to fall back to System Regular")
+	return hit
+}
+
+def text = { String s, String face ->
+	return CSG.text(s, depth, size_pts, resolveFont(face))
+}
+
+// segments of a composed line sit one word space apart, measured from the face itself
+def spaceWidth = { String face ->
+	return text("n n", face).getTotalX() - text("nn", face).getTotalX()
+}
+
+def renderLine = { spec ->
+	if (spec instanceof CSG)
+		return spec
+	if (!(spec instanceof List))
+		return text(spec.toString(), font)
+	CSG row = null
+	String lastFace = font
+	spec.each { seg ->
+		CSG part
+		if (seg instanceof CSG) {
+			part = seg
+			// center on the cap height of the preceding face ("H" spans baseline to cap)
+			CSG cap = text("H", lastFace)
+			def capMid = (cap.getMinY() + cap.getMaxY()) / 2
+			part = part.movey(capMid - (part.getMinY() + part.getMaxY()) / 2)
+		} else if (seg instanceof Map) {
+			lastFace = seg.font ?: font
+			part = text(seg.text, lastFace)
+		} else {
+			lastFace = font
+			part = text(seg.toString(), font)
+		}
+		if (row == null) {
+			row = part
+		} else {
+			part = part.movex(row.getMaxX() + spaceWidth(lastFace) - part.getMinX())
+			row = row.union(part)
+		}
+	}
+	return row
+}
+
 CSG ret
-if (firstLine) {
-    ret = firstLine
-} else if (firstLine_string) {
-    firstLine = CSG.text(firstLine_string, depth, size_pts, font)
-    ret = firstLine
-}
-
-if (secondLine) {
-    secondLine = secondLine.movey(spacing_mm)
-} else if (secondLine_string) {
-    secondLine = CSG.text(secondLine_string, depth, size_pts, font)
-	secondLine = secondLine.movey(spacing_mm)
-}
-if (ret && secondLine) {
-	ret = ret.union(secondLine)
-} else if (secondLine) {
-	ret = secondLine
-}
-
-if (thirdLine) {
-    thirdLine = thirdLine.movey(spacing_mm*2)
-} else if (thirdLine_string) {
-    thirdLine = CSG.text(thirdLine_string, depth, size_pts, font)
-	thirdLine = thirdLine.movey(spacing_mm*2)
-}
-if (ret && thirdLine) {
-	ret = ret.union(thirdLine)
-} else if (thirdLine) {
-	ret = thirdLine
-}
-
-if (fourthLine) {
-    fourthLine = fourthLine.movey(spacing_mm*3)
-} else if (fourthLine_string) {
-    fourthLine = CSG.text(fourthLine_string, depth, size_pts, font)
-	fourthLine = fourthLine.movey(spacing_mm*3)
-}
-if (ret && fourthLine) {
-	ret = ret.union(fourthLine)
-} else if (fourthLine) {
-	ret = (fourthLine)
-}
-
-if (fifthLine) {
-	fifthLine = fifthLine.movey(spacing_mm*4)
-} else if (fifthLine_string) {
-	fifthLine = CSG.text(fifthLine_string, depth, size_pts, font)
-	fifthLine = fifthLine.movey(spacing_mm*4)
-}
-if (ret && fifthLine) {
-	ret = ret.union(fifthLine)
-} else if (fifthLine) {
-	ret = fifthLine
-}
-
-if (sixthLine) {
-	sixthLine = sixthLine.movey(spacing_mm*5)
-} else if (sixthLine_string) {
-	sixthLine = CSG.text(sixthLine_string, depth, size_pts, font)
-	sixthLine = sixthLine.movey(spacing_mm*5)
-}
-if (ret && sixthLine) {
-	ret = ret.union(sixthLine)
-} else if (sixthLine) {
-	ret = sixthLine
-}
-
-if (seventhLine) {
-	seventhLine = seventhLine.movey(spacing_mm*6)
-} else if (seventhLine_string) {
-	seventhLine = CSG.text(seventhLine_string, depth, size_pts, font)
-	seventhLine = seventhLine.movey(spacing_mm*6)
-}
-if (ret && seventhLine) {
-	ret = ret.union(seventhLine)
-} else if (seventhLine) {
-	ret = seventhLine
+lines.keySet().sort().each { int n ->
+	CSG line = renderLine(lines[n])
+	if (n > 1)
+		line = line.movey(spacing_mm*(n-1))
+	ret = ret ? ret.union(line) : line
 }
 
 
@@ -335,7 +282,7 @@ ret = ret.setColor(javafx.scene.paint.Color.PINK)
 //	def fonts = javafx.scene.text.Font.getFontNames()
 //	println fonts.size()
 //}
-			
+
 if (print_fonts) {
 	def fonts = javafx.scene.text.Font.getFontNames()
 	def fontIndex = 0
