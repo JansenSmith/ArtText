@@ -216,7 +216,8 @@ def resolveFont = { String want ->
 	def hit = candidates.find { fontKey(new javafx.scene.text.Font(it, size_pts).getName()) == fontKey(want) }
 	if (hit == null)
 		throw new Exception("ArtText: JavaFX can't load font '${want}' (tried ${candidates}); refusing to fall back to System Regular")
-	return hit
+	// hand CSG.text JavaFX's own spelling so its name check passes (no font-list dump)
+	return new javafx.scene.text.Font(hit, size_pts).getName()
 }
 
 def text = { String s, String face ->
