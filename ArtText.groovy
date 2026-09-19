@@ -210,9 +210,12 @@ switch (name) {
 def fontNames = javafx.scene.text.Font.getFontNames()
 def fontKey = { String s -> s.toLowerCase().replaceAll(/[^a-z0-9]/, "") }
 def resolveFont = { String want ->
-	def hit = fontNames.find { fontKey(it) == fontKey(want) }
+	// try the name as written, then any listed name that matches it; keep the first
+	// one JavaFX actually loads (a miss comes back as "System Regular")
+	def candidates = [want] + fontNames.findAll { fontKey(it) == fontKey(want) }
+	def hit = candidates.find { fontKey(new javafx.scene.text.Font(it, size_pts).getName()) == fontKey(want) }
 	if (hit == null)
-		throw new Exception("ArtText: font '${want}' is not in the JavaFX font list; refusing to fall back to System Regular")
+		throw new Exception("ArtText: JavaFX can't load font '${want}' (tried ${candidates}); refusing to fall back to System Regular")
 	return hit
 }
 
