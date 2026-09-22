@@ -102,11 +102,12 @@ switch (name) {
 	case "regatta_triangles":
 		// Study piece: every Pagella face, a mixed-face line, the PD icon inline.
 		// Upper block is my piece; lower block is the source.
-		lines[8] = [[text: "Worcester's Regatta Roots, 2026", font: BOLD_ITALIC], pdIcon()]
-		lines[7] = [[text: "By", font: REGULAR], [text: "Jansen Smith", font: BOLD]]
-		lines[6] = [[text: "Stamped in triangles", font: ITALIC]]
-		lines[5] = [[text: "Layered in PLA", font: ITALIC]]
-		lines[3] = [[text: "The College Regatta at Worcester, 1868", font: ITALIC]]
+		lines[9] = [[text: "Worcester's Regatta Roots, 2026", font: BOLD_ITALIC], pdIcon()]
+		lines[8] = [[text: "By", font: REGULAR], [text: "Jansen Smith", font: BOLD]]
+		lines[7] = [[text: "Stamped in triangles", font: ITALIC]]
+		lines[6] = [[text: "Layered in PLA", font: ITALIC]]
+		lines[4] = [[text: "The College Regatta at Worcester", font: ITALIC]]
+		lines[3] = [[text: "Lake Quinsigamond, Friday July 24, 1868", font: ITALIC]]
 		lines[2] = [[text: "Sketch by C.E.H. Bonwill, 1835\u20131918", font: REGULAR]]
 		lines[1] = [[text: WHM_string, font: REGULAR]]
 		break
