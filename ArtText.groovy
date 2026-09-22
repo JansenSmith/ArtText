@@ -72,7 +72,10 @@ def pdIcon = { ->
 //   pdIcon()                            — any CSG, placed as-is
 //   [seg, seg, ...]                     — segments laid left to right, each one:
 //        "text" | [text: "...", font: ITALIC] | pdIcon()
+//                | [csg: pdIcon(), gap: 2.5]
 //     a CSG segment is centered on the cap height of the text before it.
+//     `gap` widens the space BEFORE that segment, as a multiple of one word
+//     space in the preceding face. Default 1. Works on text segments too.
 def lines = [:]
 switch (name) {
 	case "mechEng":
@@ -102,7 +105,7 @@ switch (name) {
 	case "regatta_triangles":
 		// Study piece: every Pagella face, a mixed-face line, the PD icon inline.
 		// Upper block is my piece; lower block is the source.
-		lines[9] = [[text: "Worcester's Regatta Roots, 2026", font: BOLD_ITALIC], pdIcon()]
+		lines[9] = [[text: "Worcester's Regatta Roots, 2026", font: BOLD_ITALIC], [csg: pdIcon(), gap: 2.5]]
 		lines[8] = [[text: "By", font: REGULAR], [text: "Jansen Smith", font: BOLD]]
 		lines[7] = [[text: "Stamped in triangles", font: ITALIC]]
 		lines[6] = [[text: "Layered in PLA", font: ITALIC]]
@@ -239,15 +242,24 @@ def renderLine = { spec ->
 	String lastFace = font
 	spec.each { seg ->
 		CSG part
-		if (seg instanceof CSG) {
-			part = seg
-			// center on the cap height of the preceding face ("H" spans baseline to cap)
+		def gap = 1
+		// a CSG rides on the cap height of the preceding face ("H" spans baseline to cap)
+		def centerOnCap = { CSG c ->
 			CSG cap = text("H", lastFace)
 			def capMid = (cap.getMinY() + cap.getMaxY()) / 2
-			part = part.movey(capMid - (part.getMinY() + part.getMaxY()) / 2)
+			return c.movey(capMid - (c.getMinY() + c.getMaxY()) / 2)
+		}
+		if (seg instanceof CSG) {
+			part = centerOnCap(seg)
 		} else if (seg instanceof Map) {
-			lastFace = seg.font ?: font
-			part = text(seg.text, lastFace)
+			if (seg.gap != null)
+				gap = seg.gap
+			if (seg.csg != null) {
+				part = centerOnCap((CSG)seg.csg)
+			} else {
+				lastFace = seg.font ?: font
+				part = text(seg.text, lastFace)
+			}
 		} else {
 			lastFace = font
 			part = text(seg.toString(), font)
@@ -255,7 +267,7 @@ def renderLine = { spec ->
 		if (row == null) {
 			row = part
 		} else {
-			part = part.movex(row.getMaxX() + spaceWidth(lastFace) - part.getMinX())
+			part = part.movex(row.getMaxX() + spaceWidth(lastFace)*gap - part.getMinX())
 			row = row.union(part)
 		}
 	}
