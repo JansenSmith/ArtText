@@ -107,7 +107,7 @@ switch (name) {
 		lines[7] = [[text: "Stamped in triangles", font: ITALIC]]
 		lines[6] = [[text: "Layered in PLA", font: ITALIC]]
 		lines[4] = [[text: "The College Regatta at Worcester", font: ITALIC]]
-		lines[3] = [[text: "Lake Quinsigamond, Friday, July 24, 1868", font: ITALIC]]
+		lines[3] = [[text: "Lake Quinsigamond, Friday July 24, 1868", font: ITALIC]]
 		lines[2] = [[text: "Sketch by C.E.H. Bonwill, 1835\u20131918", font: REGULAR]]
 		lines[1] = [[text: WHM_string, font: REGULAR]]
 		break
