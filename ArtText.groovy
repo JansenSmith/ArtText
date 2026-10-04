@@ -96,11 +96,21 @@ switch (name) {
 		lines[3] = pdIcon()
 		break
 	case "regatta":
-		lines[1] = pdIcon()
-		lines[2] = WHM_string
-		lines[3] = celebrating_string
-		lines[4] = LakeQuinsigamond_1868_string
-		lines[5] = regatta_string
+		// Two blocks: mine on top, the source citation below, one blank line between.
+		// Both blocks hang: every line after each block's first is indented two spaces.
+		// The citation is MLA with a little Chicago, the artist's wording verbatim. Its
+		// italic span runs from "The College" to "Grand Stand." and is plain ITALIC, his
+		// call 2026-10-03 — the source title is the one thing set in the engraving's own
+		// voice, so it does not take my title's weight.
+		lines[10] = [[text: "Worcester's Regatta Roots, 2026", font: BOLD_ITALIC], [csg: pdIcon(), gap: 2.5]]
+		lines[9]  = [[indent: 2], [text: "By", font: REGULAR], [text: "Jansen Smith", font: BOLD]]
+		lines[8]  = [[indent: 2], [text: "Layered in PLA", font: REGULAR]]
+		lines[6]  = [[text: "Bonwill, Charles E.H.", font: REGULAR], [text: "The College", font: ITALIC]]
+		lines[5]  = [[indent: 2], [text: "Regatta at Worcester, Mass., July", font: ITALIC]]
+		lines[4]  = [[indent: 2], [text: "24th 1868 - The Harvard Crew Passing", font: ITALIC]]
+		lines[3]  = [[indent: 2], [text: "the Grand Stand.", font: ITALIC], [text: "Frank Leslie's", font: REGULAR]]
+		lines[2]  = [[indent: 2], [text: "Illustrated Newspaper, 15 Aug. 1868.", font: REGULAR]]
+		lines[1]  = [[indent: 2], [text: "Worcester Historical Museum.", font: REGULAR]]
 		break
 	case "regatta_triangles":
 		// Study piece: every Pagella face, a mixed-face line, the PD icon inline.
@@ -240,7 +250,14 @@ def renderLine = { spec ->
 		return text(spec.toString(), font)
 	CSG row = null
 	String lastFace = font
+	double indent = 0
 	spec.each { seg ->
+		// [indent: n] as a segment shifts the whole line right by n spaces. Measured in
+		// REGULAR spaces whatever the line's own face, so a hanging indent stays a column.
+		if (seg instanceof Map && seg.indent != null && seg.text == null && seg.csg == null) {
+			indent = spaceWidth(REGULAR) * seg.indent
+			return
+		}
 		CSG part
 		def gap = 1
 		// a CSG rides on the cap height of the preceding face ("H" spans baseline to cap)
@@ -271,6 +288,8 @@ def renderLine = { spec ->
 			row = row.union(part)
 		}
 	}
+	if (row != null && indent != 0)
+		row = row.movex(indent)
 	return row
 }
 
